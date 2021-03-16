@@ -23,12 +23,14 @@ namespace PluginSnowflake.API.Factory
 
         public async Task OpenAsync()
         {
-            await _conn.OpenAsync();
+            // await _conn.OpenAsync();
+            _conn.Open();
         }
 
         public async Task CloseAsync()
         {
-            await _conn.CloseAsync();
+            // await _conn.CloseAsync();
+            _conn.Close();
         }
 
         public async Task<bool> PingAsync()
