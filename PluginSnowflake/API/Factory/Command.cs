@@ -1,29 +1,33 @@
 using System.Threading.Tasks;
+using Snowflake.Data.Client;
 
 namespace PluginSnowflake.API.Factory
 {
     public class Command : ICommand
     {
-        private readonly MySqlCommand _cmd;
+        private readonly SnowflakeDbCommand _cmd;
 
         public Command()
         {
-            _cmd = new MySqlCommand();
+            _cmd = new SnowflakeDbCommand();
         }
 
         public Command(string commandText)
         {
-            _cmd = new MySqlCommand(commandText);
+            _cmd = new SnowflakeDbCommand();
+            _cmd.CommandText = commandText;
         }
 
         public Command(string commandText, IConnection conn)
         {
-            _cmd = new MySqlCommand(commandText, (MySqlConnection) conn.GetConnection());
+            _cmd = new SnowflakeDbCommand();
+            _cmd.CommandText = commandText;
+            _cmd.Connection = (SnowflakeDbConnection) conn.GetConnection();
         }
 
         public void SetConnection(IConnection conn)
         {
-            _cmd.Connection = (MySqlConnection) conn.GetConnection();
+            _cmd.Connection = (SnowflakeDbConnection) conn.GetConnection();
         }
 
         public void SetCommandText(string commandText)
@@ -33,7 +37,11 @@ namespace PluginSnowflake.API.Factory
 
         public void AddParameter(string name, object value)
         {
-            _cmd.Parameters.AddWithValue(name, value);
+            var param = _cmd.CreateParameter();
+            param.ParameterName = name;
+            param.Value = value;
+            param.DbType = System.Data.DbType.Object;
+            _cmd.Parameters.Add(param);
         }
 
         public async Task<IReader> ExecuteReaderAsync()

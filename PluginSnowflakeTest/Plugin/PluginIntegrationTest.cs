@@ -18,10 +18,10 @@ namespace PluginSnowflakeTest.Plugin
         {
             return new Settings
             {
-                Hostname = "150.136.152.223",
-                Database = "classicmodels",
-                Username = "root",
-                Password = "dtC5&CFiQ$9j"
+                Account = "bi13697",
+                Database = "SNOWFLAKE_SAMPLE_DATA",
+                User = "testuser",
+                Password = "s@mp13"
             };
         }
 

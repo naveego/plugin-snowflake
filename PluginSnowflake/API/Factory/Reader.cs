@@ -1,15 +1,16 @@
 using System.Data;
 using System.Threading.Tasks;
+using Snowflake.Data.Client;
 
 namespace PluginSnowflake.API.Factory
 {
     public class Reader : IReader
     {
-        private readonly MySqlDataReader _reader;
+        private readonly SnowflakeDbDataReader _reader;
 
         public Reader(IDataReader reader)
         {
-            _reader = (MySqlDataReader) reader;
+            _reader = (SnowflakeDbDataReader) reader;
         }
 
         public async Task<bool> ReadAsync()
@@ -27,7 +28,7 @@ namespace PluginSnowflake.API.Factory
             return _reader.GetSchemaTable();
         }
 
-        public object GetValueById(string id, char trimChar = '`')
+        public object GetValueById(string id, char trimChar = '"')
         {
             return _reader[id.Trim(trimChar)];
         }

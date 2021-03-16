@@ -12,10 +12,9 @@ namespace PluginSnowflakeTest.Helper
             // setup
             var settings = new Settings
             {
-                Hostname = "123.456.789.0",
-                Port = "3306",
+                Account = "123.456.789.0",
                 Database = "testdb",
-                Username = "username",
+                User = "User",
                 Password = "password"
             };
 
@@ -26,14 +25,14 @@ namespace PluginSnowflakeTest.Helper
         }
 
         [Fact]
-        public void ValidateNoHostNameTest()
+        public void ValidateNoAccountTest()
         {
             // setup
             var settings = new Settings
             {
-                Hostname = null,
+                Account = null,
                 Database = "testdb",
-                Username = "username",
+                User = "User",
                 Password = "password"
             };
 
@@ -41,7 +40,7 @@ namespace PluginSnowflakeTest.Helper
             Exception e = Assert.Throws<Exception>(() => settings.Validate());
 
             // assert
-            Assert.Contains("The Hostname property must be set", e.Message);
+            Assert.Contains("The Account property must be set", e.Message);
         }
         
         [Fact]
@@ -50,9 +49,9 @@ namespace PluginSnowflakeTest.Helper
             // setup
             var settings = new Settings
             {
-                Hostname = "123.456.789.0",
+                Account = "123.456.789.0",
                 Database = null,
-                Username = "username",
+                User = "User",
                 Password = "password"
             };
 
@@ -64,14 +63,14 @@ namespace PluginSnowflakeTest.Helper
         }
         
         [Fact]
-        public void ValidateNoUsernameTest()
+        public void ValidateNoUserTest()
         {
             // setup
             var settings = new Settings
             {
-                Hostname = "123.456.789.0",
+                Account = "123.456.789.0",
                 Database = "testdb",
-                Username = null,
+                User = null,
                 Password = "password"
             };
 
@@ -79,7 +78,7 @@ namespace PluginSnowflakeTest.Helper
             Exception e = Assert.Throws<Exception>(() => settings.Validate());
 
             // assert
-            Assert.Contains("The Username property must be set", e.Message);
+            Assert.Contains("The User property must be set", e.Message);
         }
         
         [Fact]
@@ -88,9 +87,9 @@ namespace PluginSnowflakeTest.Helper
             // setup
             var settings = new Settings
             {
-                Hostname = "123.456.789.0",
+                Account = "123.456.789.0",
                 Database = "testdb",
-                Username = "username",
+                User = "User",
                 Password = null
             };
 
@@ -107,10 +106,9 @@ namespace PluginSnowflakeTest.Helper
             // setup
             var settings = new Settings
             {
-                Hostname = "123.456.789.0",
-                Port = "3306",
+                Account = "123.456.789.0",
                 Database = "testdb",
-                Username = "username",
+                User = "User",
                 Password = "password"
             };
 
@@ -119,8 +117,8 @@ namespace PluginSnowflakeTest.Helper
             var connDbString = settings.GetConnectionString("otherdb");
 
             // assert
-            Assert.Equal("Server=123.456.789.0; Port=3306; Database=testdb; User=username; Password=password;", connString);
-            Assert.Equal("Server=123.456.789.0; Port=3306; Database=otherdb; User=username; Password=password;", connDbString);
+            Assert.Equal("account=123.456.789.0;user=User;password=password;db=testdb;", connString);
+            Assert.Equal("account=123.456.789.0;user=User;password=password;db=otherdb;", connDbString);
         }
     }
 }

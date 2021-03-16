@@ -4,9 +4,8 @@ namespace PluginSnowflake.Helper
 {
     public class Settings
     {
-        public string Hostname { get; set; }
-        public string Port { get; set; }
-        public string Username { get; set; }
+        public string Account { get; set; }
+        public string User { get; set; }
         public string Password { get; set; }
         public string Database { get; set; }
 
@@ -16,9 +15,9 @@ namespace PluginSnowflake.Helper
         /// <exception cref="Exception"></exception>
         public void Validate()
         {
-            if (String.IsNullOrEmpty(Hostname))
+            if (String.IsNullOrEmpty(Account))
             {
-                throw new Exception("The Hostname property must be set");
+                throw new Exception("The Account property must be set");
             }
             
             if (String.IsNullOrEmpty(Database))
@@ -26,9 +25,9 @@ namespace PluginSnowflake.Helper
                 throw new Exception("The Database property must be set");
             }
 
-            if (String.IsNullOrEmpty(Username))
+            if (String.IsNullOrEmpty(User))
             {
-                throw new Exception("The Username property must be set");
+                throw new Exception("The User property must be set");
             }
             
             if (String.IsNullOrEmpty(Password))
@@ -43,7 +42,7 @@ namespace PluginSnowflake.Helper
         /// <returns></returns>
         public string GetConnectionString()
         {
-            return $"Server={Hostname}; Port={Port}; Database={Database}; User={Username}; Password={Password};";
+            return $"account={Account};user={User};password={Password};db={Database};";
         }
         
         /// <summary>
@@ -52,7 +51,7 @@ namespace PluginSnowflake.Helper
         /// <returns></returns>
         public string GetConnectionString(string database)
         {
-            return $"Server={Hostname}; Port={Port}; Database={database}; User={Username}; Password={Password};";
+            return $"account={Account};user={User};password={Password};db={database};";
         }
     }
 }
