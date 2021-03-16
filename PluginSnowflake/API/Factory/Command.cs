@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
-namespace PluginMySQL.API.Factory
+namespace PluginSnowflake.API.Factory
 {
     public class Command : ICommand
     {

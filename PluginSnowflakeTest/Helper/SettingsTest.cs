@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using PluginMySQL.Helper;
+using PluginSnowflake.Helper;
 using Xunit;
 
-namespace PluginMySQLTest.Helper
+namespace PluginSnowflakeTest.Helper
 {
     public class SettingsTest
     {

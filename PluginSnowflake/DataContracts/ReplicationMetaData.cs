@@ -1,7 +1,7 @@
 using System;
 using Naveego.Sdk.Plugins;
 
-namespace PluginMySQL.DataContracts
+namespace PluginSnowflake.DataContracts
 {
     public class ReplicationMetaData
     {

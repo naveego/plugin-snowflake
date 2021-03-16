@@ -1,11 +1,10 @@
 using System.Text;
 using System.Threading.Tasks;
-using Naveego.Sdk.Plugins;
-using PluginMySQL.API.Factory;
-using PluginMySQL.DataContracts;
-using PluginMySQL.Helper;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.DataContracts;
+using PluginSnowflake.Helper;
 
-namespace PluginMySQL.API.Replication
+namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {

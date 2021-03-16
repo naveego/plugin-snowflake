@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using Naveego.Sdk.Plugins;
 
-namespace PluginMySQL.API.Discover
+namespace PluginSnowflake.API.Discover
 {
     public static partial class Discover
     {

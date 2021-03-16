@@ -1,6 +1,6 @@
-using PluginMySQL.API.Utility;
+using PluginSnowflake.API.Utility;
 
-namespace PluginMySQL.DataContracts
+namespace PluginSnowflake.DataContracts
 {
     public class WriteStoredProcedure
     {

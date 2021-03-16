@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Naveego.Sdk.Plugins;
 using Newtonsoft.Json;
-using PluginMySQL.API.Factory;
-using PluginMySQL.API.Utility;
-using PluginMySQL.DataContracts;
-using PluginMySQL.Helper;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.API.Utility;
+using PluginSnowflake.DataContracts;
+using PluginSnowflake.Helper;
 
-namespace PluginMySQL.API.Replication
+namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {

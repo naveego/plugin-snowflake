@@ -1,4 +1,4 @@
-namespace PluginMySQL.DataContracts
+namespace PluginSnowflake.DataContracts
 {
     public class ConfigureWriteFormData
     {

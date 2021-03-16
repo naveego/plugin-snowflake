@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Naveego.Sdk.Plugins;
 using Newtonsoft.Json;
-using PluginMySQL.API.Factory;
-using PluginMySQL.Helper;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.Helper;
 
-namespace PluginMySQL.API.Write
+namespace PluginSnowflake.API.Write
 {
     public static partial class Write
     {

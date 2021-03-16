@@ -1,6 +1,6 @@
 using Naveego.Sdk.Plugins;
 
-namespace PluginMySQL.Helper
+namespace PluginSnowflake.Helper
 {
     public class WriteSettings
     {

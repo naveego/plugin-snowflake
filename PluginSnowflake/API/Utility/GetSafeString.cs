@@ -1,4 +1,4 @@
-namespace PluginMySQL.API.Utility
+namespace PluginSnowflake.API.Utility
 {
     public static partial class Utility
     {

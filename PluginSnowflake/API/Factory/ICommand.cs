@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PluginMySQL.API.Factory
+namespace PluginSnowflake.API.Factory
 {
     public interface ICommand
     {

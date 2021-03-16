@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using PluginMySQL.DataContracts;
+using PluginSnowflake.DataContracts;
 
-namespace PluginMySQL.API.Write
+namespace PluginSnowflake.API.Write
 {
     public static partial class Write
     {

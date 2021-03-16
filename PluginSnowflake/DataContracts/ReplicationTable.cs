@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PluginMySQL.DataContracts
+namespace PluginSnowflake.DataContracts
 {
     public class ReplicationTable
     {

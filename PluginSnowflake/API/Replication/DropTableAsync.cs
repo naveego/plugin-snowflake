@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
-using Naveego.Sdk.Plugins;
-using PluginMySQL.API.Factory;
-using PluginMySQL.DataContracts;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.DataContracts;
 
-namespace PluginMySQL.API.Replication
+namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {

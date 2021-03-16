@@ -2,12 +2,12 @@ using System;
 using System.Threading.Tasks;
 using Naveego.Sdk.Plugins;
 using Newtonsoft.Json;
-using PluginMySQL.API.Factory;
-using PluginMySQL.DataContracts;
-using PluginMySQL.Helper;
-using Constants = PluginMySQL.API.Utility.Constants;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.DataContracts;
+using PluginSnowflake.Helper;
+using Constants = PluginSnowflake.API.Utility.Constants;
 
-namespace PluginMySQL.API.Replication
+namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {

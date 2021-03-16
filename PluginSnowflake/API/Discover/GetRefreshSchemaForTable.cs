@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Naveego.Sdk.Plugins;
-using PluginMySQL.API.Factory;
+using PluginSnowflake.API.Factory;
 
-namespace PluginMySQL.API.Discover
+namespace PluginSnowflake.API.Discover
 {
     public static partial class Discover
     {

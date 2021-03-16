@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using PluginMySQL.DataContracts;
+using PluginSnowflake.DataContracts;
 
-namespace PluginMySQL.API.Utility
+namespace PluginSnowflake.API.Utility
 {
     public static class Constants
     {

@@ -1,10 +1,8 @@
-using System;
 using System.Threading.Tasks;
-using PluginMySQL.API.Factory;
-using PluginMySQL.DataContracts;
-using PluginMySQL.Helper;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.DataContracts;
 
-namespace PluginMySQL.API.Replication
+namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {

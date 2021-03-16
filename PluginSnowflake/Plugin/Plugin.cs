@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Naveego.Sdk.Plugins;
 using Newtonsoft.Json;
-using PluginMySQL.API.Discover;
-using PluginMySQL.API.Factory;
-using PluginMySQL.API.Read;
-using PluginMySQL.API.Replication;
-using PluginMySQL.API.Write;
-using PluginMySQL.DataContracts;
-using PluginMySQL.Helper;
+using PluginSnowflake.API.Discover;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.API.Read;
+using PluginSnowflake.API.Replication;
+using PluginSnowflake.API.Write;
+using PluginSnowflake.DataContracts;
+using PluginSnowflake.Helper;
 
-namespace PluginMySQL.Plugin
+namespace PluginSnowflake.Plugin
 {
     public class Plugin : Publisher.PublisherBase
     {

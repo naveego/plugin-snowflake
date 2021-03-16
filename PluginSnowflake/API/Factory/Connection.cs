@@ -1,9 +1,8 @@
 using System.Data;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using PluginMySQL.Helper;
+using PluginSnowflake.Helper;
 
-namespace PluginMySQL.API.Factory
+namespace PluginSnowflake.API.Factory
 {
     public class Connection : IConnection
     {

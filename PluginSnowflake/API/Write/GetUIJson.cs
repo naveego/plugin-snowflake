@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace PluginMySQL.API.Write
+namespace PluginSnowflake.API.Write
 {
     public static partial class Write
     {

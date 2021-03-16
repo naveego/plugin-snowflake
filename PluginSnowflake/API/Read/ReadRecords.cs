@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using Naveego.Sdk.Plugins;
 using Newtonsoft.Json;
-using PluginMySQL.API.Factory;
-using PluginMySQL.Helper;
+using PluginSnowflake.API.Factory;
+using PluginSnowflake.Helper;
 
-namespace PluginMySQL.API.Read
+namespace PluginSnowflake.API.Read
 {
     public static partial class Read
     {
