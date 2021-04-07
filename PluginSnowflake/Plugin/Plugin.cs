@@ -13,6 +13,7 @@ using PluginSnowflake.API.Replication;
 using PluginSnowflake.API.Write;
 using PluginSnowflake.DataContracts;
 using PluginSnowflake.Helper;
+using Snowflake.Data.Client;
 
 namespace PluginSnowflake.Plugin
 {

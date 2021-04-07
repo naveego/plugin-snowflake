@@ -3,8 +3,8 @@
   "displayName": "Snowflake",
   "description": "Publisher which connects to Snowflake",
   "apiVersion": "2",
-  "versionDescription": "Version 2",
-  "version": "1.1.2",
+  "versionDescription": "Version 1",
+  "version": "1.0.0",
   "iconFile": "icon.png",
   "executable": "PluginSnowflake",
   "kind": "publisher",
@@ -17,8 +17,8 @@
   "canUseOAuth": false,
   "canConfigureWrite": false,
   "canWrite": false,
-  "canConfigureReplication": true,
-  "canWriteReplication": true,
+  "canConfigureReplication": false,
+  "canWriteReplication": false,
   "querySchema": {
     "ui": {
       "ui:widget": "code",
@@ -36,6 +36,7 @@
         "Hostname",
         "Port",
         "Database",
+        "Warehouse",
         "Username",
         "Password"
       ],
@@ -70,13 +71,19 @@
           "type": "string",
           "title": "Database",
           "description": "The Database within the Snowflake Server"
+        },
+        "Warehouse": {
+          "type": "string",
+          "title": "Warehouse",
+          "description": "The Warehouse within the Snowflake Server"
         }
       },
       "required": [
         "Hostname",
         "Username",
         "Password",
-        "Database"
+        "Database",
+        "Warehouse"
       ]
     }
   }

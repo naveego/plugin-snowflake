@@ -18,21 +18,20 @@ namespace PluginSnowflake.API.Discover
         private const string CharacterMaxLength = "CHARACTER_MAXIMUM_LENGTH";
 
         private const string GetAllTablesAndColumnsQuery = @"
-SELECT t.TABLE_NAME
-     , t.TABLE_SCHEMA
-     , t.TABLE_TYPE
-     , c.COLUMN_NAME
-     , c.DATA_TYPE
-     , c.COLUMN_KEY
-     , c.IS_NULLABLE
-     , c.CHARACTER_MAXIMUM_LENGTH
-
+SELECT DISTINCT
+    t.TABLE_SCHEMA as TABLE_SCHEMA,
+    t.TABLE_NAME as TABLE_NAME,
+    t.TABLE_TYPE as TABLE_TYPE,
+    c.COLUMN_NAME as COLUMN_NAME,
+    c.DATA_TYPE as DATA_TYPE,
+    '0' as COLUMN_KEY,
+    c.IS_NULLABLE as IS_NULLABLE,
+    c.CHARACTER_MAXIMUM_LENGTH as CHARACTER_MAXIMUM_LENGTH,
+    c.ORDINAL_POSITION
 FROM INFORMATION_SCHEMA.TABLES AS t
-      INNER JOIN INFORMATION_SCHEMA.COLUMNS AS c ON c.TABLE_SCHEMA = t.TABLE_SCHEMA AND c.TABLE_NAME = t.TABLE_NAME
-
-WHERE t.TABLE_SCHEMA NOT IN ('mysql', 'information_schema', 'performance_schema', 'sys')
-
-ORDER BY t.TABLE_NAME";
+LEFT OUTER JOIN INFORMATION_SCHEMA.COLUMNS AS c ON c.TABLE_SCHEMA = t.TABLE_SCHEMA AND c.TABLE_NAME = t.TABLE_NAME
+WHERE t.TABLE_SCHEMA != 'INFORMATION_SCHEMA'
+ORDER BY t.TABLE_NAME, c.ORDINAL_POSITION";
 
         public static async IAsyncEnumerable<Schema> GetAllSchemas(IConnectionFactory connFactory, int sampleSize = 5)
         {
@@ -50,7 +49,7 @@ ORDER BY t.TABLE_NAME";
                 while (await reader.ReadAsync())
                 {
                     var schemaId =
-                        $"{Utility.Utility.GetSafeName(reader.GetValueById(TableSchema).ToString(), '`')}.{Utility.Utility.GetSafeName(reader.GetValueById(TableName).ToString(), '`')}";
+                        $"{Utility.Utility.GetSafeName(reader.GetValueById(TableSchema).ToString())}.{Utility.Utility.GetSafeName(reader.GetValueById(TableName).ToString())}";
                     if (schemaId != currentSchemaId)
                     {
                         // return previous schema
@@ -75,9 +74,9 @@ ORDER BY t.TABLE_NAME";
                     // add column to schema
                     var property = new Property
                     {
-                        Id = $"`{reader.GetValueById(ColumnName)}`",
+                        Id = $"{Utility.Utility.GetSafeName(reader.GetValueById(ColumnName).ToString())}",
                         Name = reader.GetValueById(ColumnName).ToString(),
-                        IsKey = reader.GetValueById(ColumnKey).ToString() == "PRI",
+                        IsKey = reader.GetValueById(ColumnKey).ToString() == "1",
                         IsNullable = reader.GetValueById(IsNullable).ToString() == "YES",
                         Type = GetType(reader.GetValueById(DataType).ToString()),
                         TypeAtSource = GetTypeAtSource(reader.GetValueById(DataType).ToString(),
@@ -111,7 +110,7 @@ ORDER BY t.TABLE_NAME";
 
         public static PropertyType GetType(string dataType)
         {
-            switch (dataType)
+            switch (dataType.ToLower())
             {
                 case "datetime":
                 case "timestamp":
@@ -120,7 +119,7 @@ ORDER BY t.TABLE_NAME";
                     return PropertyType.Date;
                 case "time":
                     return PropertyType.Time;
-                case "tinyint":
+                case "integer":
                 case "smallint":
                 case "mediumint":
                 case "int":
@@ -133,17 +132,14 @@ ORDER BY t.TABLE_NAME";
                     return PropertyType.Float;
                 case "boolean":
                     return PropertyType.Bool;
-                case "blob":
-                case "mediumblob":
-                case "longblob":
+                case "binary":
+                case "varbinary":
                     return PropertyType.Blob;
                 case "char":
                 case "varchar":
-                case "tinytext":
+                case "string":
                     return PropertyType.String;
                 case "text":
-                case "mediumtext":
-                case "longtext":
                     return PropertyType.Text;
                 default:
                     return PropertyType.String;

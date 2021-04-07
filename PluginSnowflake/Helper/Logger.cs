@@ -9,7 +9,7 @@ namespace PluginSnowflake.Helper
     public static class Logger
     {
         private static string _logPrefix = "";
-        private static string _fileName = @"plugin-mysql-log.txt";
+        private static string _fileName = @"plugin-snowflake-log.txt";
         private static LogLevel _level = LogLevel.Info;
 
         /// <summary>

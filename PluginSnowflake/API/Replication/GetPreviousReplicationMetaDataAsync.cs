@@ -33,8 +33,8 @@ namespace PluginSnowflake.API.Replication
 
                 var cmd = connFactory.GetCommand(
                     string.Format(GetMetaDataQuery,
-                        Utility.Utility.GetSafeName(table.SchemaName, '`'),
-                        Utility.Utility.GetSafeName(table.TableName, '`'),
+                        Utility.Utility.GetSafeName(table.SchemaName),
+                        Utility.Utility.GetSafeName(table.TableName),
                         Utility.Utility.GetSafeName(Constants.ReplicationMetaDataJobId),
                         jobId),
                     conn);

@@ -41,7 +41,7 @@ AND table_name = '{1}'";
                 {
                     // create table
                     var querySb = new StringBuilder($@"CREATE TABLE IF NOT EXISTS 
-{Utility.Utility.GetSafeName(table.SchemaName, '`')}.{Utility.Utility.GetSafeName(table.TableName, '`')}(");
+{Utility.Utility.GetSafeName(table.SchemaName)}.{Utility.Utility.GetSafeName(table.TableName)}(");
                     var primaryKeySb = new StringBuilder("PRIMARY KEY (");
                     var hasPrimaryKey = false;
                     foreach (var column in table.Columns)

@@ -50,12 +50,12 @@ namespace PluginSnowflake.API.Discover
                             // create property
                             var property = new Property
                             {
-                                Id = Utility.Utility.GetSafeName(colName, '`'),
+                                Id = Utility.Utility.GetSafeName(colName),
                                 Name = colName,
                                 Description = "",
                                 Type = GetPropertyType(row),
-                                // TypeAtSource = row["DataType"].ToString(),
-                                IsKey = Boolean.Parse(row["IsKey"].ToString()),
+                                TypeAtSource = row["DataType"].ToString(),
+                                IsKey = false,
                                 IsNullable = Boolean.Parse(row["AllowDBNull"].ToString()),
                                 IsCreateCounter = false,
                                 IsUpdateCounter = false,

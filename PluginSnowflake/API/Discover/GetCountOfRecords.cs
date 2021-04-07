@@ -21,13 +21,13 @@ namespace PluginSnowflake.API.Discover
             {
                 await conn.OpenAsync();
 
-                var cmd = connFactory.GetCommand($"SELECT COUNT(*) as count FROM ({query}) as q", conn);
+                var cmd = connFactory.GetCommand($"SELECT COUNT(*) as COUNT FROM ({query}) as q", conn);
                 var reader = await cmd.ExecuteReaderAsync();
 
                 var count = -1;
                 while (await reader.ReadAsync())
                 {
-                    count = Convert.ToInt32(reader.GetValueById("count"));
+                    count = Convert.ToInt32(reader.GetValueById("COUNT"));
                 }
                 
                 return count == -1

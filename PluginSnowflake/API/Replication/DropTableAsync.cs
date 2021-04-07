@@ -18,8 +18,8 @@ namespace PluginSnowflake.API.Replication
 
                 var cmd = connFactory.GetCommand(
                     string.Format(DropTableQuery,
-                        Utility.Utility.GetSafeName(table.SchemaName, '`'),
-                        Utility.Utility.GetSafeName(table.TableName, '`')
+                        Utility.Utility.GetSafeName(table.SchemaName),
+                        Utility.Utility.GetSafeName(table.TableName)
                     ),
                     conn);
                 await cmd.ExecuteNonQueryAsync();
