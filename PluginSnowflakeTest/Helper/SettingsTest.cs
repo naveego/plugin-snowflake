@@ -14,7 +14,7 @@ namespace PluginSnowflakeTest.Helper
             {
                 Account = "123.456.789.0",
                 Database = "testdb",
-                User = "User",
+                Username = "Username",
                 Password = "password"
             };
 
@@ -32,7 +32,7 @@ namespace PluginSnowflakeTest.Helper
             {
                 Account = null,
                 Database = "testdb",
-                User = "User",
+                Username = "Username",
                 Password = "password"
             };
 
@@ -51,7 +51,7 @@ namespace PluginSnowflakeTest.Helper
             {
                 Account = "123.456.789.0",
                 Database = null,
-                User = "User",
+                Username = "Username",
                 Password = "password"
             };
 
@@ -70,7 +70,7 @@ namespace PluginSnowflakeTest.Helper
             {
                 Account = "123.456.789.0",
                 Database = "testdb",
-                User = null,
+                Username = null,
                 Password = "password"
             };
 
@@ -78,7 +78,7 @@ namespace PluginSnowflakeTest.Helper
             Exception e = Assert.Throws<Exception>(() => settings.Validate());
 
             // assert
-            Assert.Contains("The User property must be set", e.Message);
+            Assert.Contains("The Username property must be set", e.Message);
         }
         
         [Fact]
@@ -89,7 +89,7 @@ namespace PluginSnowflakeTest.Helper
             {
                 Account = "123.456.789.0",
                 Database = "testdb",
-                User = "User",
+                Username = "Username",
                 Password = null
             };
 
@@ -108,7 +108,7 @@ namespace PluginSnowflakeTest.Helper
             {
                 Account = "123.456.789.0",
                 Database = "testdb",
-                User = "User",
+                Username = "Username",
                 Password = "password"
             };
 
@@ -117,8 +117,8 @@ namespace PluginSnowflakeTest.Helper
             var connDbString = settings.GetConnectionString("otherdb");
 
             // assert
-            Assert.Equal("account=123.456.789.0;user=User;password=password;db=testdb;", connString);
-            Assert.Equal("account=123.456.789.0;user=User;password=password;db=otherdb;", connDbString);
+            Assert.Equal("account=123.456.789.0;user=Username;password=password;db=testdb;", connString);
+            Assert.Equal("account=123.456.789.0;user=Username;password=password;db=otherdb;", connDbString);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace PluginSnowflakeTest.Plugin
             {
                 Account = "",
                 Database = "DEMO_DB",
-                User = "",
+                Username = "",
                 Password = "",
                 Warehouse = "COMPUTE_WH"
             };

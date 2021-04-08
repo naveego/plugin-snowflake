@@ -5,7 +5,7 @@ namespace PluginSnowflake.Helper
     public class Settings
     {
         public string Account { get; set; }
-        public string User { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
         public string Database { get; set; }
         public string Warehouse { get; set; }
@@ -26,9 +26,9 @@ namespace PluginSnowflake.Helper
                 throw new Exception("The Database property must be set");
             }
 
-            if (String.IsNullOrEmpty(User))
+            if (String.IsNullOrEmpty(Username))
             {
-                throw new Exception("The User property must be set");
+                throw new Exception("The Username property must be set");
             }
             
             if (String.IsNullOrEmpty(Password))
@@ -48,7 +48,7 @@ namespace PluginSnowflake.Helper
         /// <returns></returns>
         public string GetConnectionString()
         {
-            return $"account={Account};user={User};password={Password};db={Database};";
+            return $"account={Account};user={Username};password={Password};db={Database};";
         }
         
         /// <summary>
@@ -57,7 +57,7 @@ namespace PluginSnowflake.Helper
         /// <returns></returns>
         public string GetConnectionString(string database)
         {
-            return $"account={Account};user={User};password={Password};db={database};warehouse={Warehouse};";
+            return $"account={Account};user={Username};password={Password};db={database};warehouse={Warehouse};";
         }
     }
 }

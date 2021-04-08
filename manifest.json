@@ -33,8 +33,7 @@
   "configSchema": {
     "ui": {
       "ui:order": [
-        "Hostname",
-        "Port",
+        "Account",
         "Database",
         "Warehouse",
         "Username",
@@ -47,39 +46,34 @@
     "schema": {
       "type": "object",
       "properties": {
-        "Hostname" : {
+        "Account" : {
           "type": "string",
-          "title": "Hostname",
-          "description": "The hostname of the Snowflake Server"
-        },
-        "Port": {
-          "type": "string",
-          "title": "Port",
-          "description": "The port of the Snowflake Server"
+          "title": "Account",
+          "description": "The account of the Snowflake instance."
         },
         "Username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to use for authentication"
+          "description": "The username to use for authentication."
         },
         "Password": {
           "type": "string",
           "title": "Password",
-          "description": "The password to use for authentication"
+          "description": "The password to use for authentication."
         },
         "Database": {
           "type": "string",
           "title": "Database",
-          "description": "The Database within the Snowflake Server"
+          "description": "The database within the Snowflake instance."
         },
         "Warehouse": {
           "type": "string",
           "title": "Warehouse",
-          "description": "The Warehouse within the Snowflake Server"
+          "description": "The warehouse within the Snowflake instance."
         }
       },
       "required": [
-        "Hostname",
+        "Account",
         "Username",
         "Password",
         "Database",
