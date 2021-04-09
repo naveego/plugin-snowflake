@@ -48,7 +48,7 @@ namespace PluginSnowflake.Helper
         /// <returns></returns>
         public string GetConnectionString()
         {
-            return $"account={Account};user={Username};password={Password};db={Database};";
+            return $"account={Account};user={Username};password={Password};db={Database};warehouse={Warehouse};";
         }
         
         /// <summary>
