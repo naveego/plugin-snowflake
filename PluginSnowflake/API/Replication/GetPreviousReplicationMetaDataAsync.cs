@@ -13,6 +13,7 @@ namespace PluginSnowflake.API.Replication
     public static partial class Replication
     {
         private static readonly string GetMetaDataQuery = @"SELECT * FROM {0}.{1} WHERE {2} = '{3}'";
+        private static readonly string EnsureMetaDataQuery = @"SELECT COUNT(*) as C FROM {0}.{1} WHERE {2} = '{3}'";
 
         public static async Task<ReplicationMetaData> GetPreviousReplicationMetaDataAsync(
             IConnectionFactory connFactory,
@@ -29,21 +30,31 @@ namespace PluginSnowflake.API.Replication
                 await EnsureTableAsync(connFactory, table);
 
                 // check if metadata exists
-
                 await conn.OpenAsync();
-
+                
                 var cmd = connFactory.GetCommand(
-                    string.Format(GetMetaDataQuery,
+                    string.Format(EnsureMetaDataQuery,
                         Utility.Utility.GetSafeName(table.SchemaName),
                         Utility.Utility.GetSafeName(table.TableName),
                         Utility.Utility.GetSafeName(Constants.ReplicationMetaDataJobId),
                         jobId),
                     conn);
                 var reader = await cmd.ExecuteReaderAsync();
+                await reader.ReadAsync();
+                var count = (long) reader.GetValueById("C");
 
-                if (reader.HasRows())
+                if (count > 0)
                 {
                     // metadata exists
+                    cmd = connFactory.GetCommand(
+                        string.Format(GetMetaDataQuery,
+                            Utility.Utility.GetSafeName(table.SchemaName),
+                            Utility.Utility.GetSafeName(table.TableName),
+                            Utility.Utility.GetSafeName(Constants.ReplicationMetaDataJobId),
+                            jobId),
+                        conn);
+                    reader = await cmd.ExecuteReaderAsync();
+                    
                     await reader.ReadAsync();
 
                     var request = JsonConvert.DeserializeObject<PrepareWriteRequest>(

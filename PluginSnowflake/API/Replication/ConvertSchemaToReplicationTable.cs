@@ -50,13 +50,13 @@ namespace PluginSnowflake.API.Replication
                 case PropertyType.Bool:
                     return "boolean";
                 case PropertyType.Blob:
-                    return "longblob";
+                    return "varbinary";
                 case PropertyType.String:
-                    return "varchar(255)";
+                    return "string";
                 case PropertyType.Text:
-                    return "longtext";
+                    return "text";
                 default:
-                    return "longtext";
+                    return "text";
             }
         }
     }

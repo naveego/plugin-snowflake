@@ -60,7 +60,7 @@ namespace PluginSnowflake.Plugin
         }
 
         /// <summary>
-        /// Establishes a connection with MySQL.
+        /// Establishes a connection with Snowflake.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="context"></param>
@@ -348,7 +348,7 @@ namespace PluginSnowflake.Plugin
         }
 
         /// <summary>
-        /// Configures replication writebacks to MySQL
+        /// Configures replication writebacks to Snowflake
         /// </summary>
         /// <param name="request"></param>
         /// <param name="context"></param>
@@ -403,7 +403,7 @@ namespace PluginSnowflake.Plugin
         }
 
         /// <summary>
-        /// Prepares writeback settings to write to MySQL
+        /// Prepares writeback settings to write to Snowflake
         /// </summary>
         /// <param name="request"></param>
         /// <param name="context"></param>
@@ -448,7 +448,7 @@ namespace PluginSnowflake.Plugin
         }
 
         /// <summary>
-        /// Writes records to MySQL
+        /// Writes records to Snowflake
         /// </summary>
         /// <param name="requestStream"></param>
         /// <param name="responseStream"></param>
@@ -459,7 +459,7 @@ namespace PluginSnowflake.Plugin
         {
             try
             {
-                Logger.Info("Writing records to MySQL...");
+                Logger.Info("Writing records to Snowflake...");
             
                 var schema = _server.WriteSettings.Schema;
                 var inCount = 0;
@@ -495,7 +495,7 @@ namespace PluginSnowflake.Plugin
                     }
                 }
             
-                Logger.Info($"Wrote {inCount} records to MySQL.");
+                Logger.Info($"Wrote {inCount} records to Snowflake.");
             }
             catch (Exception e)
             {

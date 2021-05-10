@@ -6,7 +6,7 @@ namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {
-        private static readonly string RecordExistsQuery = @"SELECT COUNT(*) as c
+        private static readonly string RecordExistsQuery = @"SELECT COUNT(*) as C
 FROM (
 SELECT * FROM {0}.{1}
 WHERE {2} = '{3}'    
@@ -24,7 +24,7 @@ WHERE {2} = '{3}'
                 var cmd = connFactory.GetCommand(string.Format(RecordExistsQuery,
                         Utility.Utility.GetSafeName(table.SchemaName),
                         Utility.Utility.GetSafeName(table.TableName),
-                        Utility.Utility.GetSafeName(table.Columns.Find(c => c.PrimaryKey == true).ColumnName),
+                        Utility.Utility.GetSafeName(table.Columns.Find(c => c.PrimaryKey).ColumnName),
                         primaryKeyValue
                     ),
                     conn);
@@ -32,7 +32,7 @@ WHERE {2} = '{3}'
                 // check if record exists
                 var reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
-                var count = (long) reader.GetValueById("c");
+                var count = (long) reader.GetValueById("C");
                 
                 return count != 0;
             }

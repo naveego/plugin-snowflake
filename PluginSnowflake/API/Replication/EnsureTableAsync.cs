@@ -9,7 +9,7 @@ namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {
-        private static readonly string EnsureTableQuery = @"SELECT COUNT(*) as c
+        private static readonly string EnsureTableQuery = @"SELECT COUNT(*) as C
 FROM information_schema.tables 
 WHERE table_schema = '{0}' 
 AND table_name = '{1}'";
@@ -25,7 +25,7 @@ AND table_name = '{1}'";
                 await conn.OpenAsync();
 
                 Logger.Info($"Creating Schema... {table.SchemaName}");
-                var cmd = connFactory.GetCommand($"CREATE SCHEMA IF NOT EXISTS {table.SchemaName}", conn);
+                var cmd = connFactory.GetCommand($"CREATE SCHEMA IF NOT EXISTS {Utility.Utility.GetSafeName(table.SchemaName)}", conn);
                 await cmd.ExecuteNonQueryAsync();
 
                 cmd = connFactory.GetCommand(string.Format(EnsureTableQuery, table.SchemaName, table.TableName), conn);
@@ -35,7 +35,7 @@ AND table_name = '{1}'";
                 // check if table exists
                 var reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
-                var count = (long) reader.GetValueById("c");
+                var count = (long) reader.GetValueById("C");
                 await conn.CloseAsync();
 
                 if (count == 0)

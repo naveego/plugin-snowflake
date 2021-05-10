@@ -22,54 +22,61 @@ namespace PluginSnowflake.API.Replication
             {
                 await conn.OpenAsync();
                 
-                // try to insert
-                var querySb =
-                    new StringBuilder(
-                        $"INSERT INTO {Utility.Utility.GetSafeName(table.SchemaName)}.{Utility.Utility.GetSafeName(table.TableName)}(");
-                foreach (var column in table.Columns)
+                var primaryKey = table.Columns.Find(c => c.PrimaryKey);
+                var primaryValue = recordMap[primaryKey.ColumnName];
+                if (primaryKey.Serialize)
                 {
-                    querySb.Append($"{Utility.Utility.GetSafeName(column.ColumnName)},");
+                    primaryValue = JsonConvert.SerializeObject(primaryValue);
                 }
 
-                querySb.Length--;
-                querySb.Append(") VALUES (");
-
-                foreach (var column in table.Columns)
+                if (!await RecordExistsAsync(connFactory, table, primaryValue.ToString()))
                 {
-                    if (recordMap.ContainsKey(column.ColumnName))
+                    // insert record
+                    var querySb =
+                        new StringBuilder(
+                            $"INSERT INTO {Utility.Utility.GetSafeName(table.SchemaName)}.{Utility.Utility.GetSafeName(table.TableName)}(");
+                    foreach (var column in table.Columns)
                     {
-                        var rawValue = recordMap[column.ColumnName];
-                        if (column.Serialize)
+                        querySb.Append($"{Utility.Utility.GetSafeName(column.ColumnName)},");
+                    }
+
+                    querySb.Length--;
+                    querySb.Append(") VALUES (");
+
+                    foreach (var column in table.Columns)
+                    {
+                        if (recordMap.ContainsKey(column.ColumnName))
                         {
-                            rawValue = JsonConvert.SerializeObject(rawValue);
+                            var rawValue = recordMap[column.ColumnName];
+                            if (column.Serialize)
+                            {
+                                rawValue = JsonConvert.SerializeObject(rawValue);
+                            }
+
+                            querySb.Append(rawValue != null
+                                ? $"'{Utility.Utility.GetSafeString(rawValue.ToString(), "'", "''")}',"
+                                : $"NULL,");
                         }
+                        else
+                        {
+                            querySb.Append($"NULL,");
+                        }
+                    }
 
-                        querySb.Append(rawValue != null
-                            ? $"'{Utility.Utility.GetSafeString(rawValue.ToString(), "'", "''")}',"
-                            : $"NULL,");
-                    }
-                    else
-                    {
-                        querySb.Append($"NULL,");
-                    }
+                    querySb.Length--;
+                    querySb.Append(");");
+
+                    var query = querySb.ToString();
+
+                    Logger.Debug($"Insert record query: {query}");
+
+                    var cmd = connFactory.GetCommand(query, conn);
+
+                    await cmd.ExecuteNonQueryAsync();
                 }
-
-                querySb.Length--;
-                querySb.Append(");");
-
-                var query = querySb.ToString();
-
-                Logger.Debug($"Insert record query: {query}");
-
-                var cmd = connFactory.GetCommand(query, conn);
-
-                await cmd.ExecuteNonQueryAsync();
-            }
-            catch (Exception e)
-            {
-                try
+                else
                 {
-                    // update if it failed
+                    // update record
                     var querySb =
                         new StringBuilder(
                             $"UPDATE {Utility.Utility.GetSafeName(table.SchemaName)}.{Utility.Utility.GetSafeName(table.TableName)} SET ");
@@ -104,14 +111,7 @@ namespace PluginSnowflake.API.Replication
 
                     querySb.Length--;
 
-                    var primaryKey = table.Columns.Find(c => c.PrimaryKey);
-                    var primaryValue = recordMap[primaryKey.ColumnName];
-                    if (primaryKey.Serialize)
-                    {
-                        primaryValue = JsonConvert.SerializeObject(primaryValue);
-                    }
-
-                    querySb.Append($" WHERE {primaryKey.ColumnName} = '{primaryValue}'");
+                    querySb.Append($" WHERE {Utility.Utility.GetSafeName(primaryKey.ColumnName)} = '{primaryValue}'");
 
                     var query = querySb.ToString();
 
@@ -119,16 +119,11 @@ namespace PluginSnowflake.API.Replication
 
                     await cmd.ExecuteNonQueryAsync();
                 }
-                catch (Exception exception)
-                {
-                    Logger.Error(e, $"Error Insert: {e.Message}");
-                    Logger.Error(exception, $"Error Update: {exception.Message}");
-                    throw;
-                }
-                finally
-                {
-                    await conn.CloseAsync();
-                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, $"Error Upsert Record: {e.Message}");
+                throw;
             }
             finally
             {

@@ -18,10 +18,10 @@ namespace PluginSnowflakeTest.Plugin
         {
             return new Settings
             {
-                Account = "",
+                Account = "mia27094.us-east-1",
                 Database = "DEMO_DB",
-                Username = "",
-                Password = "",
+                Username = "wroehler",
+                Password = "19Ch@%SEP9a*uUuC8Mr4XKYD",
                 Warehouse = "COMPUTE_WH"
             };
         }
@@ -568,7 +568,7 @@ namespace PluginSnowflakeTest.Plugin
                 {
                     JobId = "jobUnitTest",
                     ShapeId = "shapeUnitTest",
-                    JobDataVersion = 1,
+                    JobDataVersion = 2,
                     ShapeDataVersion = 2
                 }
             };
