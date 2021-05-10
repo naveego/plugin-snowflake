@@ -18,10 +18,10 @@ namespace PluginSnowflakeTest.Plugin
         {
             return new Settings
             {
-                Account = "mia27094.us-east-1",
+                Account = "",
                 Database = "DEMO_DB",
-                Username = "wroehler",
-                Password = "19Ch@%SEP9a*uUuC8Mr4XKYD",
+                Username = "",
+                Password = "",
                 Warehouse = "COMPUTE_WH"
             };
         }
