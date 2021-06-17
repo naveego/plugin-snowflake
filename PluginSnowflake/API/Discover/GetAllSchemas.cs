@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
 using Naveego.Sdk.Plugins;
 using PluginSnowflake.API.Factory;
 
@@ -56,7 +57,7 @@ ORDER BY t.TABLE_NAME, c.ORDINAL_POSITION";
                         if (schema != null)
                         {
                             // get sample and count
-                            yield return await AddSampleAndCount(connFactory, schema, sampleSize);
+                            yield return schema;
                         }
 
                         // start new schema
@@ -67,7 +68,8 @@ ORDER BY t.TABLE_NAME, c.ORDINAL_POSITION";
                             Id = currentSchemaId,
                             Name = $"{parts.Schema}.{parts.Table}",
                             Properties = { },
-                            DataFlowDirection = Schema.Types.DataFlowDirection.Read
+                            DataFlowDirection = Schema.Types.DataFlowDirection.Read,
+                            Count = new Count { Kind = Count.Types.Kind.Unavailable }
                         };
                     }
 
@@ -88,7 +90,7 @@ ORDER BY t.TABLE_NAME, c.ORDINAL_POSITION";
                 if (schema != null)
                 {
                     // get sample and count
-                    yield return await AddSampleAndCount(connFactory, schema, sampleSize);
+                    yield return schema;
                 }
             }
             finally
