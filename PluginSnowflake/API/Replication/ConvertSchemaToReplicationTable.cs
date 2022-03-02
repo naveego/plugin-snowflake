@@ -7,13 +7,14 @@ namespace PluginSnowflake.API.Replication
     public static partial class Replication 
     {
         public static ReplicationTable ConvertSchemaToReplicationTable(Schema schema, string schemaName,
-            string tableName)
+            string tableName, bool shouldCreateSchema)
         {
             var table = new ReplicationTable
             {
                 SchemaName = schemaName,
                 TableName = tableName,
-                Columns = new List<ReplicationColumn>()
+                Columns = new List<ReplicationColumn>(),
+                ShouldCreateSchema = shouldCreateSchema
             };
             
             foreach (var property in schema.Properties)

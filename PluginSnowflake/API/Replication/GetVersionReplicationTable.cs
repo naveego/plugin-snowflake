@@ -6,9 +6,9 @@ namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {
-        public static ReplicationTable GetVersionReplicationTable(Schema schema, string safeSchemaName, string safeVersionTableName)
+        public static ReplicationTable GetVersionReplicationTable(Schema schema, string safeSchemaName, string safeVersionTableName, bool shouldCreateSchema)
         {
-            var versionTable = ConvertSchemaToReplicationTable(schema, safeSchemaName, safeVersionTableName);
+            var versionTable = ConvertSchemaToReplicationTable(schema, safeSchemaName, safeVersionTableName, shouldCreateSchema);
             versionTable.Columns.Add(new ReplicationColumn
             {
                 ColumnName = Constants.ReplicationVersionRecordId,

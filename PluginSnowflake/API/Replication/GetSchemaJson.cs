@@ -30,6 +30,13 @@ namespace PluginSnowflake.API.Replication
                         {"title", "Version Record Table Name"},
                         {"description", "Name for your version record table in Snowflake"},
                     }},
+                    {"ShouldCreateSchema", new Dictionary<string, string>
+                    {
+                        {"type", "boolean"},
+                        {"title", "Should Create Schema?"},
+                        {"description", "Should the plugin create a schema in Snowflake?"},
+                        {"default", "true"}
+                    }},
                 }},
                 {"required", new []
                 {

@@ -33,11 +33,12 @@ namespace PluginSnowflake.API.Replication
             {
                 SchemaName = safeSchemaName,
                 TableName = Constants.ReplicationMetaDataTableName,
-                Columns = Constants.ReplicationMetaDataColumns
+                Columns = Constants.ReplicationMetaDataColumns,
+                ShouldCreateSchema = replicationSettings.ShouldCreateSchema
             };
 
-            var goldenTable = GetGoldenReplicationTable(request.Schema, safeSchemaName, safeGoldenTableName);
-            var versionTable = GetVersionReplicationTable(request.Schema, safeSchemaName, safeVersionTableName);
+            var goldenTable = GetGoldenReplicationTable(request.Schema, safeSchemaName, safeGoldenTableName, replicationSettings.ShouldCreateSchema);
+            var versionTable = GetVersionReplicationTable(request.Schema, safeSchemaName, safeVersionTableName, replicationSettings.ShouldCreateSchema);
 
             Logger.Info(
                 $"SchemaName: {safeSchemaName} Golden Table: {safeGoldenTableName} Version Table: {safeVersionTableName} job: {request.DataVersions.JobId}");
@@ -74,9 +75,9 @@ namespace PluginSnowflake.API.Replication
                     JsonConvert.DeserializeObject<ConfigureReplicationFormData>(previousMetaData.Request.Replication
                         .SettingsJson);
                 
-                var previousGoldenTable = ConvertSchemaToReplicationTable(previousMetaData.Request.Schema, previousReplicationSettings.SchemaName, previousReplicationSettings.GoldenTableName);
+                var previousGoldenTable = ConvertSchemaToReplicationTable(previousMetaData.Request.Schema, previousReplicationSettings.SchemaName, previousReplicationSettings.GoldenTableName, previousReplicationSettings.ShouldCreateSchema);
 
-                var previousVersionTable = ConvertSchemaToReplicationTable(previousMetaData.Request.Schema, previousReplicationSettings.SchemaName, previousReplicationSettings.VersionTableName);
+                var previousVersionTable = ConvertSchemaToReplicationTable(previousMetaData.Request.Schema, previousReplicationSettings.SchemaName, previousReplicationSettings.VersionTableName, previousReplicationSettings.ShouldCreateSchema);
 
                 // check if schema changed
                 if (previousReplicationSettings.SchemaName != replicationSettings.SchemaName)

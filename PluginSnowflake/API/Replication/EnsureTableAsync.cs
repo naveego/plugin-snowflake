@@ -22,11 +22,17 @@ AND table_name = '{1}'";
 
             try
             {
+                ICommand cmd;
+                
                 await conn.OpenAsync();
 
-                Logger.Info($"Creating Schema... {table.SchemaName}");
-                var cmd = connFactory.GetCommand($"CREATE SCHEMA IF NOT EXISTS {Utility.Utility.GetSafeName(table.SchemaName)}", conn);
-                await cmd.ExecuteNonQueryAsync();
+                if (table.ShouldCreateSchema)
+                {
+                    Logger.Info($"Creating Schema... {table.SchemaName}");
+                
+                    cmd = connFactory.GetCommand($"CREATE SCHEMA IF NOT EXISTS {Utility.Utility.GetSafeName(table.SchemaName)}", conn);
+                    await cmd.ExecuteNonQueryAsync();
+                }
 
                 cmd = connFactory.GetCommand(string.Format(EnsureTableQuery, table.SchemaName, table.TableName), conn);
 

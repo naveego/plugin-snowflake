@@ -7,5 +7,6 @@ namespace PluginSnowflake.DataContracts
         public string SchemaName { get; set; }
         public string TableName { get; set; }
         public List<ReplicationColumn> Columns { get; set; }
+        public bool ShouldCreateSchema { get; set; } = true;
     }
 }

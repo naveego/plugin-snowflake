@@ -561,7 +561,8 @@ namespace PluginSnowflakeTest.Plugin
                     {
                         SchemaName = "test",
                         GoldenTableName = "gr_test",
-                        VersionTableName = "vr_test"
+                        VersionTableName = "vr_test",
+                        ShouldCreateSchema = false,
                     })
                 },
                 DataVersions = new DataVersions

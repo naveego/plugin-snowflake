@@ -6,9 +6,9 @@ namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {
-        public static ReplicationTable GetGoldenReplicationTable(Schema schema, string safeSchemaName, string safeGoldenTableName)
+        public static ReplicationTable GetGoldenReplicationTable(Schema schema, string safeSchemaName, string safeGoldenTableName, bool shouldCreateSchema)
         {
-            var goldenTable = ConvertSchemaToReplicationTable(schema, safeSchemaName, safeGoldenTableName);
+            var goldenTable = ConvertSchemaToReplicationTable(schema, safeSchemaName, safeGoldenTableName, shouldCreateSchema);
             goldenTable.Columns.Add(new ReplicationColumn
             {
                 ColumnName = Constants.ReplicationRecordId,

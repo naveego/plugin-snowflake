@@ -13,7 +13,8 @@ namespace PluginSnowflake.API.Replication
                 {
                     "SchemaName",
                     "GoldenTableName",
-                    "VersionTableName"
+                    "VersionTableName",
+                    "ShouldCreateSchema"
                 }}
             };
 

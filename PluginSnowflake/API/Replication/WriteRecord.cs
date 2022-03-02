@@ -49,8 +49,8 @@ namespace PluginSnowflake.API.Replication
                 var safeGoldenTableName = config.GoldenTableName;
                 var safeVersionTableName = config.VersionTableName;
             
-                var goldenTable = GetGoldenReplicationTable(schema, safeSchemaName, safeGoldenTableName);
-                var versionTable = GetVersionReplicationTable(schema, safeSchemaName, safeVersionTableName);
+                var goldenTable = GetGoldenReplicationTable(schema, safeSchemaName, safeGoldenTableName, config.ShouldCreateSchema);
+                var versionTable = GetVersionReplicationTable(schema, safeSchemaName, safeVersionTableName, config.ShouldCreateSchema);
             
                 // transform data
                 var recordVersionIds = record.Versions.Select(v => v.RecordId).ToList();
