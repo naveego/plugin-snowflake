@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Naveego.Sdk.Logging;
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Logging;
+using Aunalytics.Sdk.Plugins;
 using Newtonsoft.Json;
 using PluginSnowflake.API.Discover;
 using PluginSnowflake.API.Factory;
@@ -14,7 +14,6 @@ using PluginSnowflake.API.Replication;
 using PluginSnowflake.API.Write;
 using PluginSnowflake.DataContracts;
 using PluginSnowflake.Helper;
-using Snowflake.Data.Client;
 
 namespace PluginSnowflake.Plugin
 {

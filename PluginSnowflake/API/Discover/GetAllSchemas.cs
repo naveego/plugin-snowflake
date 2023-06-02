@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Google.Protobuf.WellKnownTypes;
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Plugins;
 using PluginSnowflake.API.Factory;
 
 namespace PluginSnowflake.API.Discover

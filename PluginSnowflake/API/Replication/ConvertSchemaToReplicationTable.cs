@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Plugins;
 using PluginSnowflake.DataContracts;
 
 namespace PluginSnowflake.API.Replication

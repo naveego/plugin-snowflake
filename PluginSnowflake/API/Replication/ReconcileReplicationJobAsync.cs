@@ -1,11 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using Naveego.Sdk.Logging;
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Logging;
+using Aunalytics.Sdk.Plugins;
 using Newtonsoft.Json;
 using PluginSnowflake.API.Factory;
 using PluginSnowflake.DataContracts;
-using PluginSnowflake.Helper;
 using Constants = PluginSnowflake.API.Utility.Constants;
 
 namespace PluginSnowflake.API.Replication

@@ -5,13 +5,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Naveego.Sdk.Logging;
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Logging;
+using Aunalytics.Sdk.Plugins;
 using Newtonsoft.Json;
 using PluginSnowflake.API.Factory;
 using PluginSnowflake.API.Utility;
 using PluginSnowflake.DataContracts;
-using PluginSnowflake.Helper;
 
 namespace PluginSnowflake.API.Replication
 {
