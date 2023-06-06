@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Plugins;
 using Newtonsoft.Json;
 using PluginSnowflake.DataContracts;
 using PluginSnowflake.Helper;
 using Xunit;
-using Record = Naveego.Sdk.Plugins.Record;
+using Record = Aunalytics.Sdk.Plugins.Record;
 
 namespace PluginSnowflakeTest.Plugin
 {

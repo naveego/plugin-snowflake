@@ -1,4 +1,4 @@
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Plugins;
 using PluginSnowflake.API.Utility;
 using PluginSnowflake.DataContracts;
 

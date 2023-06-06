@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Naveego.Sdk.Logging;
-using Naveego.Sdk.Plugins;
+using Aunalytics.Sdk.Logging;
+using Aunalytics.Sdk.Plugins;
 using Newtonsoft.Json;
 using PluginSnowflake.API.Factory;
-using PluginSnowflake.Helper;
 
 namespace PluginSnowflake.API.Write
 {

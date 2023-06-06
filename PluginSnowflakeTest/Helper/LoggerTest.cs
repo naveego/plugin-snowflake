@@ -1,9 +1,8 @@
 using System;
 using System.IO;
 using System.Linq;
-using Naveego.Sdk.Logging;
-using Naveego.Sdk.Plugins;
-using PluginSnowflake.Helper;
+using Aunalytics.Sdk.Logging;
+using Aunalytics.Sdk.Plugins;
 using Xunit;
 
 namespace PluginSnowflakeTest.Helper

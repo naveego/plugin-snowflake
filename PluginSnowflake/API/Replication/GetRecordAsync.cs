@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Naveego.Sdk.Logging;
+using Aunalytics.Sdk.Logging;
 using PluginSnowflake.API.Factory;
 using PluginSnowflake.DataContracts;
-using PluginSnowflake.Helper;
 
 namespace PluginSnowflake.API.Replication
 {
