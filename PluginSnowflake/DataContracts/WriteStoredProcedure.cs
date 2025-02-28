@@ -6,7 +6,6 @@ namespace PluginSnowflake.DataContracts
     {
         public string SchemaName { get; set; }
         public string RoutineName { get; set; }
-        public string SpecificName { get; set; }
 
         public string GetId()
         {

@@ -7,15 +7,7 @@ namespace PluginSnowflake.API.Write
 {
     public static partial class Write
     {
-        private static string ParamName = "PARAMETER_NAME";
-        private static string DataType = "DATA_TYPE";
-
-        private static string GetStoredProcedureParamsQuery = @"
-SELECT PARAMETER_NAME, DATA_TYPE, ORDINAL_POSITION
-FROM INFORMATION_SCHEMA.PARAMETERS
-WHERE SPECIFIC_SCHEMA = '{0}'
-AND SPECIFIC_NAME = '{1}'
-ORDER BY ORDINAL_POSITION ASC";
+        private static readonly string GetStoredProcedureParamsQuery = @"select ARGUMENT_SIGNATURE from INFORMATION_SCHEMA.PROCEDURES where PROCEDURE_NAME='{0}'";
 
         public static async Task<Schema> GetSchemaForStoredProcedureAsync(IConnectionFactory connFactory,
             WriteStoredProcedure storedProcedure)
@@ -33,22 +25,39 @@ ORDER BY ORDINAL_POSITION ASC";
             await conn.OpenAsync();
 
             var cmd = connFactory.GetCommand(
-                string.Format(GetStoredProcedureParamsQuery, storedProcedure.SchemaName, storedProcedure.SpecificName),
+                string.Format(GetStoredProcedureParamsQuery, storedProcedure.RoutineName),
                 conn);
             var reader = await cmd.ExecuteReaderAsync();
 
-            while (await reader.ReadAsync())
+            if (await reader.ReadAsync())
             {
-                var property = new Property
+                var paramSignature = reader.GetValueById("ARGUMENT_SIGNATURE").ToString();
+                if(paramSignature.StartsWith("(") && paramSignature.EndsWith(")")){ 
+                    paramSignature = paramSignature.Substring(1, paramSignature.Length - 2);
+                }
+                var paramSignatureSplit = paramSignature.Split(',');
+                foreach (var param in paramSignatureSplit)
                 {
-                    Id = reader.GetValueById(ParamName).ToString(),
-                    Name = reader.GetValueById(ParamName).ToString(),
-                    Description = "",
-                    Type = Discover.Discover.GetType(reader.GetValueById(DataType).ToString()),
-                    TypeAtSource = reader.GetValueById(DataType).ToString()
-                };
+                    try
+                    {
+                        // split by whitespace
+                        var paramSplit = param.Trim().Split(' ');
+                        var property = new Property
+                        {
+                            Id = paramSplit[0],
+                            Name = paramSplit[0],
+                            Description = "",
+                            Type = Discover.Discover.GetType(paramSplit[1]),
+                            TypeAtSource = paramSplit[1]
+                        };
 
-                schema.Properties.Add(property);
+                        schema.Properties.Add(property);
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
+                }
             }
 
             await conn.CloseAsync();

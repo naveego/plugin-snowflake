@@ -7,14 +7,10 @@ namespace PluginSnowflake.API.Write
 {
     public static partial class Write
     {
-        private const string SchemaName = "ROUTINE_SCHEMA";
-        private const string RoutineName = "ROUTINE_NAME";
-        private const string SpecificName = "SPECIFIC_NAME";
+        private const string SchemaName = "PROCEDURE_SCHEMA";
+        private const string RoutineName = "PROCEDURE_NAME";
 
-        private static string GetAllStoredProceduresQuery = @"
-SELECT ROUTINE_SCHEMA, ROUTINE_NAME, SPECIFIC_NAME
-FROM INFORMATION_SCHEMA.ROUTINES
-WHERE ROUTINE_TYPE = 'PROCEDURE' AND ROUTINE_SCHEMA != 'sys'";
+        private static string GetAllStoredProceduresQuery = @"select PROCEDURE_SCHEMA, PROCEDURE_NAME from INFORMATION_SCHEMA.PROCEDURES";
 
         public static async Task<List<WriteStoredProcedure>> GetAllStoredProceduresAsync(IConnectionFactory connFactory)
         {
@@ -34,7 +30,6 @@ WHERE ROUTINE_TYPE = 'PROCEDURE' AND ROUTINE_SCHEMA != 'sys'";
                     {
                         SchemaName = reader.GetValueById(SchemaName).ToString(),
                         RoutineName = reader.GetValueById(RoutineName).ToString(),
-                        SpecificName = reader.GetValueById(SpecificName).ToString()
                     };
 
                     storedProcedures.Add(storedProcedure);
