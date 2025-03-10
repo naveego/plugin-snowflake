@@ -127,6 +127,7 @@ ORDER BY t.TABLE_NAME, c.ORDINAL_POSITION";
                 case "bigint":
                     return PropertyType.Integer;
                 case "decimal":
+                case "number":
                     return PropertyType.Decimal;
                 case "float":
                 case "double":
