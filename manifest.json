@@ -4,7 +4,7 @@
   "description": "Publisher which connects to Snowflake",
   "apiVersion": "2",
   "versionDescription": "Version 1.4",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "iconFile": "icon.png",
   "executable": "PluginSnowflake",
   "kind": "publisher",
