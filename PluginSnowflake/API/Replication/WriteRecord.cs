@@ -16,8 +16,8 @@ namespace PluginSnowflake.API.Replication
 {
     public static partial class Replication
     {
-        private static readonly SemaphoreSlim ReplicationSemaphoreSlim = new SemaphoreSlim(1, 1);
-        
+        private static readonly SemaphoreSlim ReplicationSemaphoreSlim = new SemaphoreSlim(10, 10);
+
         /// <summary>
         /// Adds and removes records to replication db
         /// Adds and updates available shapes
@@ -59,19 +59,12 @@ namespace PluginSnowflake.API.Replication
             
                 // get previous golden record
                 List<string> previousRecordVersionIds;
-                if (await RecordExistsAsync(connFactory, goldenTable, record.RecordId))
+                var recordMap = await GetRecordAsync(connFactory, goldenTable, record.RecordId);
+
+                if (recordMap != null && recordMap.ContainsKey(Constants.ReplicationVersionIds))
                 {
-                    var recordMap = await GetRecordAsync(connFactory, goldenTable, record.RecordId);
-            
-                    if (recordMap.ContainsKey(Constants.ReplicationVersionIds))
-                    {
-                        previousRecordVersionIds =
-                            JsonConvert.DeserializeObject<List<string>>(recordMap[Constants.ReplicationVersionIds].ToString());
-                    }
-                    else
-                    {
-                        previousRecordVersionIds = recordVersionIds;
-                    }
+                    previousRecordVersionIds =
+                        JsonConvert.DeserializeObject<List<string>>(recordMap[Constants.ReplicationVersionIds].ToString());
                 }
                 else
                 {
