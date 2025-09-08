@@ -48,7 +48,7 @@ namespace PluginSnowflake.Helper
         /// <returns></returns>
         public string GetConnectionString()
         {
-            return $"account={Account};user={Username};password={Password};db={Database};warehouse={Warehouse};";
+            return $"account={Account};user={Username};password={Password};db={Database};warehouse={Warehouse};maxPoolSize=50;";
         }
         
         /// <summary>
@@ -57,7 +57,7 @@ namespace PluginSnowflake.Helper
         /// <returns></returns>
         public string GetConnectionString(string database)
         {
-            return $"account={Account};user={Username};password={Password};db={database};warehouse={Warehouse};";
+            return $"account={Account};user={Username};password={Password};db={database};warehouse={Warehouse};maxPoolSize=50;";
         }
     }
 }
